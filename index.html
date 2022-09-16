@@ -16,6 +16,11 @@
       #inputs {
         text-align: center;
       }
+      #factorTables {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
     </style>
   </head>
   <body>
@@ -25,6 +30,18 @@
       ><input id="input2" type="number" />
       <p><button onclick="factor()">Factor</button></p>
       <p id="displayGCF">GCF:</p>
+      <div id="factorTables">
+        <table id="factors1">
+          <thead id="factors1Head">
+            <td><input value="Factors of:" /></td>
+          </thead>
+        </table>
+        <table id="factors2">
+          <thead>
+            <td><input value="Factors of:" /></td>
+          </thead>
+        </table>
+      </div>
     </div>
   </body>
 </html>
