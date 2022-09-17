@@ -13,32 +13,83 @@
       h1 {
         text-align: center;
       }
+      p {
+        margin: 10px;
+      }
       #inputs {
         text-align: center;
+      }
+      #input1 {
+        padding: 7px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: black;
+      }
+      #input2 {
+        padding: 7px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: black;
+      }
+      #displayGCF {
+        font-weight: bold;
       }
       #factorTables {
         display: flex;
         justify-content: center;
         align-items: flex-start;
       }
+      input {
+        border-style: none;
+        background-color: transparent;
+        width: 125px;
+      }
+      table {
+        margin: 2px;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 5px;
+      }
+      #factors1Head {
+        font-weight: bold;
+      }
+      #factors2Head {
+        font-weight: bold;
+      }
+      #CF {
+        color: rgb(65, 65, 255);
+      }
+      #GCF {
+        color: rgb(201, 0, 0);
+      }
+      #factorButton {
+        padding: 3px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 7px;
+        border-width: 1px;
+      }
     </style>
   </head>
   <body>
     <h1>Factoring Calculator</h1>
     <div id="inputs">
-      <input id="input1" type="number" /><span> </span
-      ><input id="input2" type="number" />
-      <p><button onclick="factor()">Factor</button></p>
-      <p id="displayGCF">GCF:</p>
+      <input id="input1" type="number" placeholder="Type number here" /><span>
+      </span
+      ><input id="input2" type="number" placeholder="Type number here" />
+      <p><button id="factorButton" onclick="factor()">Factor</button></p>
+      <p>GCF: <span id="displayGCF"></span></p>
       <div id="factorTables">
         <table id="factors1">
-          <thead id="factors1Head">
-            <td><input value="Factors of:" /></td>
+          <thead>
+            <td><input id="factors1Head" value="Factors of:" readonly /></td>
           </thead>
         </table>
         <table id="factors2">
           <thead>
-            <td><input value="Factors of:" /></td>
+            <td><input id="factors2Head" value="Factors of:" readonly /></td>
           </thead>
         </table>
       </div>
