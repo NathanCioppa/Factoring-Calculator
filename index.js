@@ -1,5 +1,4 @@
 
-    
 function factor() {
 
     let factorNumber1 = document.getElementById('input1').value
@@ -24,7 +23,6 @@ function factor() {
     document.getElementById('factors1Head').value='Factors of ' + factorNumber1 + ':'
     document.getElementById('factors2Head').value='Factors of ' + factorNumber2 + ':'
 
-    //if (factorNumber1 !== '') {
         for (let i = 1; i <= factorNumber1; i++) {
             let factors = factorNumber1 / i
             if (factorNumber1 % i === 0) {
@@ -38,9 +36,6 @@ function factor() {
         }
         //console.log('first: ' + factors1Array)
         addToArray = -1
-    //}
-    
-    if (factorNumber2 !== '') {
 
         for (let i = 1; i <= factorNumber2; i++) {
             let factors = factorNumber2 / i
@@ -68,10 +63,6 @@ function factor() {
             }
         }
         GCF()
-
-        
-
-    }
     
     if (factorNumber1 === '' || factorNumber1 === '0') {document.getElementById('displayGCF').innerText = ''}
     if (factorNumber2 === '' || factorNumber2 === '0') {document.getElementById('displayGCF').innerText = ''}
@@ -97,4 +88,65 @@ function factor() {
         
     }
     commonFactors()
+}
+
+function factorTrinomial() {
+    let inputTrinomial = document.getElementById('inputTrinomial').value
+    let digits = '0123456789'
+    let firstNumber = ''
+    let lastNumber = ''
+    let lastTerm = ''
+    let realLastNumber = ''
+    let operators = '+-'
+    
+    if (inputTrinomial[0] !== 'x') {
+        for (let i = 1; i <= 9; i++) {
+            if (inputTrinomial[0] === i.toString()) {
+                console.log('> 1')
+                i = 11
+            }
+                if (i === 11) {
+                    let ii = 0
+                    let iii = 1
+                    
+                    for (let i = 0; i < inputTrinomial.length; i++) {
+                        if (digits.includes(inputTrinomial[ii])) {
+                            firstNumber = firstNumber + inputTrinomial[ii]
+                            ii = ii + 1
+                        }
+                        
+                    }
+                    for (let i = 0; i < inputTrinomial.length; i++) {
+                        lastNumber = lastNumber + inputTrinomial[inputTrinomial.length - iii]
+                            iii = iii + 1
+                        if (operators.includes(inputTrinomial[inputTrinomial.length - iii])) {
+                            i = inputTrinomial.length
+                        }
+                    }
+                    iii = iii - 1
+                    for (let i = 0; iii > 0; i++) {
+                        lastTerm = lastTerm + inputTrinomial[inputTrinomial.length - iii]
+                        iii = iii - 1
+                    }
+                    for (let i = 0; i < lastTerm.length; i++) {
+                        if (digits.includes(lastTerm[i])) {
+                            realLastNumber = realLastNumber + lastTerm[i]
+                        } else {i = lastTerm.length}
+                    }
+                    firstNumber = Number(firstNumber)
+                    realLastNumber = Number(realLastNumber)
+                    console.log(firstNumber)
+                    //realLastNumber = Number(realLastNumber)
+                    console.log(lastTerm)
+                    console.log(realLastNumber)
+                    
+                        
+                }
+                    
+
+                
+        }
+
+    } else {
+    }
 }
