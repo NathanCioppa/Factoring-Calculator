@@ -94,10 +94,19 @@ function factorTrinomial() {
     let inputTrinomial = document.getElementById('inputTrinomial').value
     let digits = '0123456789'
     let firstNumber = ''
+    let firstTerm = ''
+    let middleTerm = ''
+    let middleNumber = ''
     let lastNumber = ''
     let lastTerm = ''
     let realLastNumber = ''
     let operators = '+-'
+    let aTimesC = 0
+    let factorsAtimesC = []
+    let goodFactor1 = 0
+    let goodFactor2 = 0
+    let sign1 = ''
+    let sign2 = ''
     
     if (inputTrinomial[0] !== 'x') {
         for (let i = 1; i <= 9; i++) {
@@ -108,13 +117,35 @@ function factorTrinomial() {
                 if (i === 11) {
                     let ii = 0
                     let iii = 1
-                    
+                    let startMiddleTerm = 1
+
+                    for (let i = 0; i < inputTrinomial.length; i++) {
+                        if (operators.includes(inputTrinomial[i])) {
+                            i = inputTrinomial.length
+                        } else { firstTerm = firstTerm + inputTrinomial[i]
+                                startMiddleTerm = startMiddleTerm + 1
+                            }
+                    }
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         if (digits.includes(inputTrinomial[ii])) {
                             firstNumber = firstNumber + inputTrinomial[ii]
                             ii = ii + 1
                         }
-                        
+                    }
+                    for (let i = 0; i < inputTrinomial.length; i++) {
+                        if (operators.includes(inputTrinomial[startMiddleTerm])) {
+                            i = inputTrinomial.length
+                        } else {
+                            middleTerm = middleTerm + inputTrinomial[startMiddleTerm]
+                            startMiddleTerm = startMiddleTerm + 1
+                        }
+                    }
+                    for (let i = 0; i < middleTerm.length; i++) {
+                        if (digits.includes(middleTerm[i])) {
+                            middleNumber = middleNumber + middleTerm[i]
+                        } else {
+                            i = middleTerm.length
+                        }
                     }
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         lastNumber = lastNumber + inputTrinomial[inputTrinomial.length - iii]
@@ -133,12 +164,67 @@ function factorTrinomial() {
                             realLastNumber = realLastNumber + lastTerm[i]
                         } else {i = lastTerm.length}
                     }
+                    for (let i = 0; i < inputTrinomial.length; i++) {
+                        if (sign1 !== '' && operators.includes(inputTrinomial[i])) {
+                            sign2 = inputTrinomial[i]
+                            i = inputTrinomial.length
+                        }
+                        if (operators.includes(inputTrinomial[i])) {
+                            sign1 = inputTrinomial[i]
+                            
+                        }
+                        
+                    }
                     firstNumber = Number(firstNumber)
+                    middleNumber = Number(middleNumber)
                     realLastNumber = Number(realLastNumber)
+
+                    aTimesC = firstNumber * realLastNumber
+                    let addToArray = -1
+                    for (let i = 0; i <= aTimesC; i++) {
+                        let factors = aTimesC / i
+                        if (aTimesC % i === 0) {
+                            addToArray = addToArray + 1
+                            factorsAtimesC[addToArray] = factors
+                        }
+                    }
+                    if (sign2 === '-') {
+                        for (let i = 0; i < factorsAtimesC.length; i++) {
+                            for (let ii = 0; ii < factorsAtimesC.length; ii++) {
+                                if (factorsAtimesC[i] - factorsAtimesC[ii] === middleNumber && factorsAtimesC[i] * factorsAtimesC[ii] === aTimesC) {
+                                    goodFactor1 = factorsAtimesC[i]
+                                    goodFactor2 = factorsAtimesC[ii]
+                                    ii = factorsAtimesC.length
+                                    i = factorsAtimesC.length
+                                }
+                            }
+                        }
+                    }
+                    if (sign2 === '+') {
+                        for (let i = 0; i < factorsAtimesC.length; i++) {
+                            for (let ii = 0; ii < factorsAtimesC.length; ii++) {
+                                if (factorsAtimesC[i] + factorsAtimesC[ii] === middleNumber && factorsAtimesC[i] * factorsAtimesC[ii] === aTimesC) {
+                                    goodFactor1 = factorsAtimesC[i]
+                                    goodFactor2 = factorsAtimesC[ii]
+                                    ii = factorsAtimesC.length
+                                    i = factorsAtimesC.length
+                                }
+                            }
+                        }
+                    }
+
+                    console.log(firstTerm)
                     console.log(firstNumber)
-                    //realLastNumber = Number(realLastNumber)
+                    console.log(middleTerm)
+                    console.log(middleNumber)
                     console.log(lastTerm)
                     console.log(realLastNumber)
+                    console.log(sign1)
+                    console.log(sign2)
+
+                    console.log(factorsAtimesC)
+                    console.log(goodFactor1)
+                    console.log(goodFactor2)
                     
                         
                 }
