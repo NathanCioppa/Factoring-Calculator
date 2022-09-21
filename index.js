@@ -94,6 +94,7 @@ function factorTrinomial() {
     let inputTrinomial = document.getElementById('inputTrinomial').value
     let digits = '0123456789'
     let firstNumber = ''
+    let firstNumberDuplicate = ''
     let firstTerm = ''
     let middleTerm = ''
     let middleNumber = ''
@@ -107,6 +108,8 @@ function factorTrinomial() {
     let goodFactor2 = 0
     let sign1 = ''
     let sign2 = ''
+    let answerSign1 = ''
+    let answerSign2 = ''
     
     if (inputTrinomial[0] !== 'x') {
         for (let i = 1; i <= 9; i++) {
@@ -176,6 +179,7 @@ function factorTrinomial() {
                         
                     }
                     firstNumber = Number(firstNumber)
+                    firstNumberDuplicate = Number(firstNumber)
                     middleNumber = Number(middleNumber)
                     realLastNumber = Number(realLastNumber)
 
@@ -189,6 +193,12 @@ function factorTrinomial() {
                         }
                     }
                     if (sign2 === '-') {
+                        answerSign1 = '+'
+                        answerSign2 = '-'
+                        if (sign1 === '-') {
+                            answerSign1 = '-'
+                            answerSign2 = '+'
+                        }
                         for (let i = 0; i < factorsAtimesC.length; i++) {
                             for (let ii = 0; ii < factorsAtimesC.length; ii++) {
                                 if (factorsAtimesC[i] - factorsAtimesC[ii] === middleNumber && factorsAtimesC[i] * factorsAtimesC[ii] === aTimesC) {
@@ -201,6 +211,8 @@ function factorTrinomial() {
                         }
                     }
                     if (sign2 === '+') {
+                        answerSign1 = sign1
+                        answerSign2 = sign1
                         for (let i = 0; i < factorsAtimesC.length; i++) {
                             for (let ii = 0; ii < factorsAtimesC.length; ii++) {
                                 if (factorsAtimesC[i] + factorsAtimesC[ii] === middleNumber && factorsAtimesC[i] * factorsAtimesC[ii] === aTimesC) {
@@ -212,6 +224,54 @@ function factorTrinomial() {
                             }
                         }
                     }
+                    function factorFirstTerm() {
+                        let factorGoodFactor1 = []
+                        factors1Array = -1
+                        for (let i = 0; i <= goodFactor1; i++) {
+                            let factors = goodFactor1 / i
+                            if (goodFactor1 % i === 0) {
+                                factors1Array = factors1Array + 1
+                                factorGoodFactor1[factors1Array] = factors
+                            }
+                        }
+                        for (let i = 0; i < factorGoodFactor1.length; i++) {
+                            if (firstNumber % factorGoodFactor1[i] === 0) {
+                                firstNumber = firstNumber / factorGoodFactor1[i]
+                                goodFactor1 = goodFactor1 / factorGoodFactor1[i]
+                                i = factorGoodFactor1.length
+                            }
+                        }
+                    }
+                    factorFirstTerm()
+                    function factorSecondTerm() {
+                        let factorGoodFactor2 = []
+                        factors2Array = -1
+                        for (let i = 0; i <= goodFactor2; i++) {
+                            let factors = goodFactor2 / i
+                            if (goodFactor2 % i === 0) {
+                                factors2Array = factors2Array + 1
+                                factorGoodFactor2[factors2Array] = factors
+                            }
+                        }
+                        for (let i = 0; i < factorGoodFactor2.length; i++) {
+                            if (firstNumberDuplicate % factorGoodFactor2[i] === 0) {
+                                firstNumberDuplicate = firstNumberDuplicate / factorGoodFactor2[i]
+                                goodFactor2 = goodFactor2 / factorGoodFactor2[i]
+                                i = factorGoodFactor2.length
+                            }
+                        }
+                    }
+                    factorSecondTerm()
+
+                    if (firstNumber === 1) {
+                        firstNumber = ''
+                    }
+                    if (firstNumberDuplicate === 1) {
+                        firstNumberDuplicate = ''
+                    }
+
+                    let generateAnswer = '(' + firstNumber + 'x' + answerSign1 + goodFactor1 + ')(' + firstNumberDuplicate + 'x' + answerSign2 + goodFactor2 + ')' 
+                        document.getElementById('factoredForm').innerText = generateAnswer
 
                     console.log(firstTerm)
                     console.log(firstNumber)
@@ -225,14 +285,9 @@ function factorTrinomial() {
                     console.log(factorsAtimesC)
                     console.log(goodFactor1)
                     console.log(goodFactor2)
-                    
-                        
-                }
-                    
-
-                
+                    console.log(generateAnswer)
+                }       
         }
-
     } else {
     }
 }
