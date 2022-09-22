@@ -16,6 +16,10 @@
       p {
         margin: 10px;
       }
+      #containerDiv {
+        display: flex;
+        justify-content: center;
+      }
       .catagoryTitle {
         font-size: 20px;
         font-weight: bold;
@@ -80,47 +84,86 @@
       #factoredForm {
         font-weight: bold;
       }
+      #conditions {
+        text-align: left;
+        font-size: 14px;
+        font-style: italic;
+        color: rgb(100, 100, 100);
+      }
+      #error {
+        color: rgb(219, 0, 0);
+        text-align: left;
+      }
+      #err {
+        font-weight: bold;
+      }
+      #errorMessage {
+        font-style: italic;
+      }
+      sup {
+        font-size: 10px;
+      }
     </style>
   </head>
   <body>
     <h1>Factoring Calculator</h1>
-    <div id="findGCF">
-      <p class="catagoryTitle">Find Factors and GCF</p>
-      <input
-        class="input"
-        id="input1"
-        type="number"
-        placeholder="Type number here"
-      /><span> </span
-      ><input
-        class="input"
-        id="input2"
-        type="number"
-        placeholder="Type number here"
-      />
-      <p><button class="factorButton" onclick="factor()">Factor</button></p>
-      <p>GCF: <span id="displayGCF"></span></p>
-      <div id="factorTables">
-        <table id="factors1">
-          <thead>
-            <td><input id="factors1Head" value="Factors of:" readonly /></td>
-          </thead>
-        </table>
-        <table id="factors2">
-          <thead>
-            <td><input id="factors2Head" value="Factors of:" readonly /></td>
-          </thead>
-        </table>
+    <div id="containerDiv">
+      <div id="findGCF">
+        <p class="catagoryTitle">Find Factors and GCF</p>
+        <input
+          class="input"
+          id="input1"
+          type="number"
+          placeholder="Type number here"
+        /><span> </span
+        ><input
+          class="input"
+          id="input2"
+          type="number"
+          placeholder="Type number here"
+        />
+        <p><button class="factorButton" onclick="factor()">Factor</button></p>
+        <p>GCF: <span id="displayGCF"></span></p>
+        <div id="factorTables">
+          <table id="factors1">
+            <thead>
+              <td><input id="factors1Head" value="Factors of:" readonly /></td>
+            </thead>
+          </table>
+          <table id="factors2">
+            <thead>
+              <td><input id="factors2Head" value="Factors of:" readonly /></td>
+            </thead>
+          </table>
+        </div>
       </div>
-    </div>
-    <div id="factorTrinomial">
-      <p class="catagoryTitle">Factor Trinomial</p>
-      <input class="input" id="inputTrinomial" type="text" />
-      <p>
-        <button class="factorButton" onclick="factorTrinomial()">Factor</button>
-      </p>
-      <p>Factored form:</p>
-      <p id="factoredForm"></p>
+      <div id="factorTrinomial">
+        <p class="catagoryTitle">Factor Trinomial</p>
+        <input class="input" id="inputTrinomial" type="text" />
+        <p>
+          <button class="factorButton" onclick="factorTrinomial()">
+            Factor
+          </button>
+        </p>
+        <p>Factored form:</p>
+        <p id="factoredForm"></p>
+        <p id="error">
+          <span id="err"></span><br /><span id="errorMessage"></span>
+        </p>
+        <p id="conditions">
+          <br />
+          For calculator to factor correctly, you must: <br />
+          -Input trinomial in ax<sup>2</sup>+bx+c format <br />
+          -Only use "x" as the variable <br />
+          -Type exponent as: ^2 <br />
+          -Use no spaces <br />
+          -Only use the exponent "2" <br />
+          <br />
+          *This calculator will not factor out a GCF, <br />
+          trinomials that can have a GCF factored <br />out may not be
+          calculated accurately
+        </p>
+      </div>
     </div>
   </body>
 </html>

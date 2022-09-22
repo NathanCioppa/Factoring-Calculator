@@ -34,7 +34,6 @@ function factor() {
                 document.getElementById('factors1').lastElementChild.firstChild.setAttribute('readonly', 'true')
             }
         }
-        //console.log('first: ' + factors1Array)
         addToArray = -1
 
         for (let i = 1; i <= factorNumber2; i++) {
@@ -49,13 +48,11 @@ function factor() {
                 
             } 
         }
-        //console.log('second: ' + factors2Array)
         
         function GCF() {
             if (factors2Array.length !== 0) {
                 for (let i = 0; i < factors2Array.length; i++) {
                     if (factorNumber1 % factors2Array[i] === 0) {
-                        //console.log('GCF: ' + factors2Array[i])
                         document.getElementById('displayGCF').innerText = factors2Array[i]
                         i = factors2Array.length
                     }
@@ -110,12 +107,28 @@ function factorTrinomial() {
     let sign2 = ''
     let answerSign1 = ''
     let answerSign2 = ''
+    let checkTerm1 = 'x^2'
+    let err = document.getElementById('err')
+    let errorMessage = document.getElementById('errorMessage')
+    let answer = document.getElementById('factoredForm')
+        errorMessage.innerText = ''
+        err.innerText = ''
+
+    if (inputTrinomial === '') {
+        document.getElementById('factoredForm').innerText = ''
+    } else {
     
-    if (inputTrinomial[0] !== 'x') {
         for (let i = 1; i <= 9; i++) {
             if (inputTrinomial[0] === i.toString()) {
-                console.log('> 1')
                 i = 11
+            } else if (inputTrinomial[0] === 'x') {
+                i = 11
+                firstNumber = '1'
+            } else if (i === 9){
+                err.innerText = 'ERROR: '
+                errorMessage.innerText = 'improper format in first term (ax^2)'
+                answer.innerText = ''
+                i = 10
             }
                 if (i === 11) {
                     let ii = 0
@@ -129,11 +142,16 @@ function factorTrinomial() {
                                 startMiddleTerm = startMiddleTerm + 1
                             }
                     }
+                    if (!firstTerm.includes(checkTerm1) || firstTerm[firstTerm.length - 1] !== '2') {
+                        err.innerText = 'ERROR: '
+                        errorMessage.innerText = 'improper format in first term (ax^2)'
+                        answer.innerText = ''
+                    } else { 
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         if (digits.includes(inputTrinomial[ii])) {
                             firstNumber = firstNumber + inputTrinomial[ii]
                             ii = ii + 1
-                        }
+                        } 
                     }
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         if (operators.includes(inputTrinomial[startMiddleTerm])) {
@@ -143,13 +161,22 @@ function factorTrinomial() {
                             startMiddleTerm = startMiddleTerm + 1
                         }
                     }
-                    for (let i = 0; i < middleTerm.length; i++) {
-                        if (digits.includes(middleTerm[i])) {
-                            middleNumber = middleNumber + middleTerm[i]
-                        } else {
-                            i = middleTerm.length
+                    if (!digits.includes(middleTerm[0])) {
+                        middleNumber = 1
+                    } else {
+                        for (let i = 0; i < middleTerm.length; i++) {
+                            if (digits.includes(middleTerm[i])) {
+                                middleNumber = middleNumber + middleTerm[i]
+                            } else {
+                                i = middleTerm.length
+                            }
                         }
                     }
+                    if (!middleTerm.includes('x') || middleTerm.includes('^') || middleTerm[middleTerm.length - 1] !== 'x') {
+                        answer.innerText = ''
+                        err.innerText = 'ERROR: '
+                        errorMessage.innerText = "improper format in second term (bx)"
+                    } else {
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         lastNumber = lastNumber + inputTrinomial[inputTrinomial.length - iii]
                             iii = iii + 1
@@ -167,6 +194,11 @@ function factorTrinomial() {
                             realLastNumber = realLastNumber + lastTerm[i]
                         } else {i = lastTerm.length}
                     }
+                    if (lastTerm !== realLastNumber) {
+                        err.innerText = 'ERROR: '
+                        errorMessage.innerText = 'improper format in third term (c)'
+                        answer.innerText = ''
+                    } else {
                     for (let i = 0; i < inputTrinomial.length; i++) {
                         if (sign1 !== '' && operators.includes(inputTrinomial[i])) {
                             sign2 = inputTrinomial[i]
@@ -176,7 +208,6 @@ function factorTrinomial() {
                             sign1 = inputTrinomial[i]
                             
                         }
-                        
                     }
                     firstNumber = Number(firstNumber)
                     firstNumberDuplicate = Number(firstNumber)
@@ -286,8 +317,10 @@ function factorTrinomial() {
                     console.log(goodFactor1)
                     console.log(goodFactor2)
                     console.log(generateAnswer)
-                }       
-        }
-    } else {
+                }
+                }
+                }      
+            }
+        }    
     }
 }
