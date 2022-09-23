@@ -108,6 +108,7 @@ function factorTrinomial() {
     let answerSign1 = ''
     let answerSign2 = ''
     let checkTerm1 = 'x^2'
+    let firstNumberError = ''
     let err = document.getElementById('err')
     let errorMessage = document.getElementById('errorMessage')
     let answer = document.getElementById('factoredForm')
@@ -210,6 +211,7 @@ function factorTrinomial() {
                         }
                     }
                     firstNumber = Number(firstNumber)
+                    firstNumberError = Number(firstNumber)
                     firstNumberDuplicate = Number(firstNumber)
                     middleNumber = Number(middleNumber)
                     realLastNumber = Number(realLastNumber)
@@ -300,6 +302,18 @@ function factorTrinomial() {
                     if (firstNumberDuplicate === 1) {
                         firstNumberDuplicate = ''
                     }
+                    if (goodFactor1 === 0 || goodFactor2 === 0) {
+                        if (sign2 === '+') {
+                            err.innerText = 'ERROR: '
+                            errorMessage.innerText = 'no factors of ' + firstNumberError * realLastNumber + ' multiply to ' + firstNumberError * realLastNumber + ' and add to ' + middleNumber
+                            answer.innerText = 'cannot factor'
+                        }
+                        if (sign2 === '-') {
+                            err.innerText = 'ERROR: '
+                            errorMessage.innerText = 'no factors of ' + firstNumberError * realLastNumber + ' multiply to ' + firstNumberError * realLastNumber + ' and subtract to ' + middleNumber
+                            answer.innerText = 'cannot factor'
+                        }
+                    } else {
 
                     let generateAnswer = '(' + firstNumber + 'x' + answerSign1 + goodFactor1 + ')(' + firstNumberDuplicate + 'x' + answerSign2 + goodFactor2 + ')' 
                         document.getElementById('factoredForm').innerText = generateAnswer
@@ -317,6 +331,7 @@ function factorTrinomial() {
                     console.log(goodFactor1)
                     console.log(goodFactor2)
                     console.log(generateAnswer)
+                }
                 }
                 }
                 }      
